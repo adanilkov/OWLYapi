@@ -29,10 +29,16 @@ const PostSchema = mongoose.Schema({
     //     type: Array,
     //     required: true
     // },
-    datePosted: {
-        type: Date,
-        default: Date.now
-    }
+    
+    //status of whether product is shown or not (false = sold/don't show, true = not sold/show)
+    status: {
+        type: Boolean,
+        required: true
+    },
+    // datePosted: {
+    //     type: Date,
+    //     default: Date.now
+    // }
 });
 
 module.exports = mongoose.model('Posts', PostSchema);
