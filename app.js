@@ -5,17 +5,14 @@ require('dotenv/config');
 mongoose.set('strictQuery', true);
 const bodyPareser = require('body-parser');
 
+//Middleware
 app.use(bodyPareser.json());
 
-//import routes
+//Import routes
 const postsRoute = require('./routes/posts');
-
-app.use('/posts', postsRoute);
-
-//routes
-app.get('/', (req, res) => {
-    res.send('we are on home')
-})
+const authRoute = require ('./routes/auth');
+app.use('/api/posts', postsRoute);
+app.use('api/user', authRoute);
 
 //connect to db
 mongoose.connect(process.env.DB_CONNECTION,
@@ -23,5 +20,5 @@ mongoose.connect(process.env.DB_CONNECTION,
     () => console.log("Connected to MongoDB")
 );
 
-//listening to server
+//listen to server
 app.listen(3000);

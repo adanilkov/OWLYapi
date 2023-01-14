@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const Post = require('../models/Post');
 
 //GET
@@ -7,18 +6,21 @@ const Post = require('../models/Post');
 router.get('/', async (req, res) => {
     try {
         const posts = Post.find();
+        res.json(posts);
         //add limit/pagination later
     } catch(err) {
-        res.status(500).json({message: err});
+        res.status(400).send(err)
+        console.log(err)
     }
 });
 //get by id
 router.get('/:postId', async(req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
-        res.status(200).json(post);
-    } catch {
-        res.status(500).json({message: err});
+        res.json(post);
+        console.log("test");
+    } catch(err) {
+        res.status(400).send(err)
     }
 });
 
@@ -26,6 +28,7 @@ router.get('/:postId', async(req, res) => {
 //add a product post
 router.post('/', async (req, res) => {
     const post = new Post({
+        id: req.body.id,
         title: req.body.title,
         description: req.body.description,
         startingBid: req.body.startingBid,
@@ -38,18 +41,18 @@ router.post('/', async (req, res) => {
         const savedPost = await post.save();
         res.status(200).json(savedPost);
     } catch(err){
-        res.status(500).json({message: err});
+        res.status(400).send(err)
         console.log(err);
     }
 });
 
 //DELETE
-router.delete('/:postId', async(req, res) => {
+router.delete('/:id', async(req, res) => {
     try {
         const removed = await Post.remove(req.params.postId);
         res.status(200).json(removed);
     } catch {
-        res.status(500).json({message: err});
+        res.status(400).send(err)
     }
 });
 
