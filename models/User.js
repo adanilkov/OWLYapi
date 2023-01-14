@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const userSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -19,3 +19,5 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     }
 })
+
+module.exports = mongoose.model('User', userSchema);

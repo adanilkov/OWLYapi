@@ -39,10 +39,10 @@ const PostSchema = mongoose.Schema({
         type: Boolean,
         required: true
     },
-    // datePosted: {
-    //     type: Date,
-    //     default: Date.now
-    // }
+    datePosted: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = mongoose.model('Posts', PostSchema);

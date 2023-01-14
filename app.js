@@ -12,13 +12,13 @@ app.use(bodyPareser.json());
 const postsRoute = require('./routes/posts');
 const authRoute = require ('./routes/auth');
 app.use('/api/posts', postsRoute);
-app.use('api/user', authRoute);
+app.use('/api/user', authRoute);
 
-//connect to db
+//Connect to db
 mongoose.connect(process.env.DB_CONNECTION,
     { useNewUrlParser: true }, 
     () => console.log("Connected to MongoDB")
 );
 
-//listen to server
+//Listen to server
 app.listen(3000);
