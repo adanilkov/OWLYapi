@@ -17,7 +17,7 @@ app.use('/api/user', authRoute);
 
 //Connect to db
 mongoose.connect(process.env.DB_CONNECTION,
-    { useNewUrlParser: true }, 
+    {useNewUrlParser: true}, 
     () => console.log("Connected to MongoDB")
 );
 
