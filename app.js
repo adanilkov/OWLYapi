@@ -1,5 +1,6 @@
 const express = require ('express');
 const mongoose = require('mongoose')
+const cors = require('cors');
 const app = express();
 require('dotenv/config');
 mongoose.set('strictQuery', true);
@@ -7,6 +8,7 @@ const bodyPareser = require('body-parser');
 const verify = require('./routes/verifyToken');
 
 //Middleware
+app.use(cors());
 app.use(bodyPareser.json());
 
 //Import routes

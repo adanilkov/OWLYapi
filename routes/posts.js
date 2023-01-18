@@ -1,16 +1,16 @@
 const router = require('express').Router();
+const { any } = require('@hapi/joi');
 const Post = require('../models/Post');
 
 //GET
 //get all
 router.get('/', async (req, res) => {
     try {
-        const posts = Post.find();
+        const posts = await Post.find();
         res.json(posts);
         //add limit/pagination later
     } catch(err) {
-        res.status(400).send(err)
-        console.log(err)
+        res.status(400).json({message:err});
     }
 });
 //get by id
@@ -18,7 +18,6 @@ router.get('/:postId', async(req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
         res.json(post);
-        console.log("test");
     } catch(err) {
         res.status(400).send(err)
     }
@@ -28,7 +27,6 @@ router.get('/:postId', async(req, res) => {
 //add a product post
 router.post('/', async (req, res) => {
     const post = new Post({
-        id: req.body.id,
         title: req.body.title,
         description: req.body.description,
         startingBid: req.body.startingBid,
