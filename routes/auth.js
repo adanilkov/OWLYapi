@@ -30,14 +30,14 @@ router.post('/register', async(req, res) => {
 router.post('/login', async(req, res) => {
     //login validation
     const {error} = userLoginValidation(req.body);
-    if(error) {return res.status(400).send(error.details[0].message);}
+    if(error) { return res.status(400).send(error.details[0].message); }
     const user = await User.findOne({email: req.body.email})
-    if (!user) return res.status(400).message("Invalid email or password")
+    if (!user) { return res.status(400).message("Invalid email or password") }
     const validPass = await bcrypt.compare(req.body.pass, user.pass)
-    if (!validPass) return res.status(400).message("Invalid email or password")
+    if (!validPass) { return res.status(400).message("Invalid email or password") }
     //jwt token assignment
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header ('auth-token', token).send(token);
 });
 
-module.exports = router;
+ 

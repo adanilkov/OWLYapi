@@ -1,11 +1,12 @@
 const express = require ('express');
-const mongoose = require('mongoose')
 const cors = require('cors');
-const app = express();
-require('dotenv/config');
+const mongoose = require('mongoose')
 mongoose.set('strictQuery', true);
+const app = express();
 const bodyPareser = require('body-parser');
 const verify = require('./routes/verifyToken');
+require('dotenv/config');
+
 
 //Middleware
 app.use(cors());
